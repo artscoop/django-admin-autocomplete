@@ -199,16 +199,12 @@ class ForeignKeySearchInput(forms.TextInput):
                         app_label: '%(app_label)s',
                         model_name: '%(model_name)s',
                         field_name: '%(name)s',
-                        width: $(this).width(),
                         %(extra_params)s
                     },
-                    'formatResult': function(data, position, total){
-                        data = $(data);
-                        $("*", data).each(function() {
-                            var content = $(this).contents();
-                            $(this).replaceWith(content);
-                        });
-                        return data;
+                    'formatResult': function(data, text, total) {
+                        text = text.replace(/(<([^>]+)>)/ig,""); // Trim tags
+                        text = text.replace(/^\s\s*/, '').replace(/\s\s*$/, ''); // Trim spaces
+                        return text;
                     }
                 }).result(function(event, data, formatted) {
                     if (data) {

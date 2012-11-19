@@ -6,6 +6,7 @@
 	background-color: white;
 	overflow: hidden;
 	z-index: 99999;
+	width:auto !important;
 }
 
 .ac_results ul {
@@ -18,9 +19,11 @@
 
 .ac_results li {
 	margin: 0px;
-	padding: 4px 8px;
+	padding: 4px 24px 4px 8px;
 	cursor: default;
 	display: block;
+	width:auto;
+	white-space:nowrap !important;
 	/* 
 	if width will be 100% horizontal scrollbar will apear 
 	when scroll mode will be used
@@ -35,6 +38,7 @@
 	line-height: 1.25em;
 	overflow: hidden;
 }
+
 
 .ac_loading {
 	background: white url('indicator.gif') right center no-repeat;
