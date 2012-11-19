@@ -10,6 +10,8 @@ from django.conf.urls.defaults import patterns
 from django.db.models.query import QuerySet
 from django.http import HttpResponse, HttpResponseNotFound
 from django.conf import settings
+from django.template.defaultfilters import striptags
+
 
 # ModelAdmin Mixin to enable autocompletion
 # based and inspired by http://jannisleidel.com/2008/11/autocomplete-form-widget-foreignkey-model-fields/
@@ -217,7 +219,7 @@ class ForeignKeySearchInput(forms.TextInput):
             'admin_media_prefix': admin_media_prefix,
             'model_name': self.rel.to._meta.module_name,
             'app_label': self.rel.to._meta.app_label,
-            'label': label,
+            'label': striptags(label),
             'name': name,
             'extra_params': extra_params,
         }
