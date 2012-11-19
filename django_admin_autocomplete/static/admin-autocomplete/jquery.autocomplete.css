@@ -1,6 +1,8 @@
 .ac_results {
 	padding: 0px;
-	border: 1px solid black;
+	border-radius: 3px;
+	border: 1px solid #20286B;
+	border: 1px solid rgba(32, 40, 107, 0.6);
 	background-color: white;
 	overflow: hidden;
 	z-index: 99999;
@@ -16,7 +18,7 @@
 
 .ac_results li {
 	margin: 0px;
-	padding: 2px 5px;
+	padding: 4px 8px;
 	cursor: default;
 	display: block;
 	/* 
@@ -25,12 +27,12 @@
 	*/
 	/*width: 100%;*/
 	font: menu;
-	font-size: 12px;
+	font-size: 1em;
 	/* 
 	it is very important, if line-height not setted or setted 
 	in relative units scroll will be broken in firefox
 	*/
-	line-height: 16px;
+	line-height: 1.25em;
 	overflow: hidden;
 }
 
@@ -43,6 +45,6 @@
 }
 
 .ac_over {
-	background-color: #0A246A;
+	background-color: #2D346A;
 	color: white;
 }
