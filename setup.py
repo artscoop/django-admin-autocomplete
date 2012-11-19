@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 from distutils.core import setup
-app_name = "django-admin-autocomplete"
+app_name = "django_admin_autocomplete"
 
 setup(
     name = app_name,
