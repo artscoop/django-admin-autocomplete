@@ -12,8 +12,9 @@ setup(
     description = "Mixin for turning foreignKey fields into autocomplete lookups.",
     keywords = "django, admin, autocomplete",
     url = "https://github.com/artscoop/django-admin-autocomplete",
-    package_dir = {app_name:app_name},
-    packages = ['django_admin_autocomplete', 'static'],
+    package_dir = {app_name:app_name, 'django_admin_autocomplete':'django_admin_autocomplete'},
+    packages = ['django_admin_autocomplete'],
+    package_data = {'static':['static/*']},
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Environment :: Web Environment",
