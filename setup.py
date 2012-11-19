@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 from distutils.core import setup
-app_name = "admin-autocomplete"
+app_name = "adminautocomplete"
 
 # Compile the list of packages available, because distutils doesn't have
 # an easy way to do this.
