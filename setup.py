@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 import os
 from distutils.core import setup
-app_name = "admin-autocomplete"
+app_name = "django-admin-autocomplete"
 
 setup(
-    name = "django-%s" % app_name,
+    name = app_name,
     version = '0.3',
     install_requires = [],
     author = "Tim Babych",
@@ -12,9 +12,9 @@ setup(
     description = "Mixin for turning foreignKey fields into autocomplete lookups.",
     keywords = "django, admin, autocomplete",
     url = "https://github.com/artscoop/django-admin-autocomplete",
-    package_dir = {'django_admin_autocomplete':'django_admin_autocomplete'},
-    packages = ['django_admin_autocomplete'],
-    package_data = {'static':['static/*']},
+    package_dir = {app_name:app_name},
+    packages = [app_name],
+    package_data = {app_name:['static/*']},
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Environment :: Web Environment",
