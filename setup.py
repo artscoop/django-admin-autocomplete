@@ -14,7 +14,6 @@ setup(
     url = "https://github.com/artscoop/django-admin-autocomplete",
     package_dir = {app_name:app_name},
     packages = ['django_admin_autocomplete', 'static'],
-    package_data={app_name: data_files},
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Environment :: Web Environment",
