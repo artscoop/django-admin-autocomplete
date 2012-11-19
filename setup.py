@@ -27,7 +27,7 @@ for dirpath, dirnames, filenames in os.walk(app_name):
 setup(
     name = "django",
     version = '0.3',
-    install_requires = ['django>=1.0'],
+    install_requires = [],
     author = "Tim Babych",
     author_email = "tim.babych@gmail.com",
     description = "Mixin for turning foreignKey fields into autocomplete lookups.",
