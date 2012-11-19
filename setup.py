@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 from distutils.core import setup
-app_name = "adminautocomplete"
+app_name = "admin-autocomplete"
 
 # Compile the list of packages available, because distutils doesn't have
 # an easy way to do this.
@@ -34,7 +34,7 @@ setup(
     keywords = "django, admin, autocomplete",
     url = "https://github.com/artscoop/django-admin-autocomplete",
     package_dir = {app_name:app_name},
-    packages = packages,
+    packages = ['django_admin_autocomplete', 'static'],
     package_data={app_name: data_files},
     classifiers=[
         "Development Status :: 3 - Alpha",
