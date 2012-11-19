@@ -197,6 +197,7 @@ class ForeignKeySearchInput(forms.TextInput):
                         app_label: '%(app_label)s',
                         model_name: '%(model_name)s',
                         field_name: '%(name)s',
+                        width: $(this).width(),
                         %(extra_params)s
                     },
                 }).result(function(event, data, formatted) {
