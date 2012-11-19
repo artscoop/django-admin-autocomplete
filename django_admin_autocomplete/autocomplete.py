@@ -202,6 +202,14 @@ class ForeignKeySearchInput(forms.TextInput):
                         width: $(this).width(),
                         %(extra_params)s
                     },
+                    'formatResult': function(data, position, total){
+                        data = $(data);
+                        $("*", data).each(function() {
+                            var content = $(this).contents();
+                            $(this).replaceWith(content);
+                        });
+                        return data;
+                    }
                 }).result(function(event, data, formatted) {
                     if (data) {
                         $('#id_%(name)s').val(data[1]);
