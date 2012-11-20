@@ -133,7 +133,7 @@ class ForeignKeySearchInput(forms.TextInput):
         js = (
             # Breaks our current <script> order. See GoodBed Trac #1061.
             # 'js/jquery.min.js',
-            'admin-autocomplete/jquery.autocomplete.min.js',
+            'admin-autocomplete/jquery.autocomplete.js',
         )
     input_type = 'hidden'
 
@@ -192,7 +192,7 @@ class ForeignKeySearchInput(forms.TextInput):
                 if ($('#lookup_%(name)s').val()) {
                     $('#del_%(name)s').show()
                 }
-                $('#lookup_%(name)s').autocomplete('../search/', {
+                $('#lookup_%(name)s').ext_autocomplete('../search/', {
                     'minChars': 2, 'cacheLength': 0, 'max':35,
                     'extraParams': {
                         search_fields: '%(search_fields)s',
