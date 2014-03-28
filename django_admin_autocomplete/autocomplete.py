@@ -10,7 +10,7 @@ from django.conf.urls.defaults import patterns
 from django.db.models.query import QuerySet
 from django.http import HttpResponse, HttpResponseNotFound
 from django.conf import settings
-from django.template.defaultfilters import striptags
+from django.template.defaultfilters import striptags, force_escape
 
 
 # ModelAdmin Mixin to enable autocompletion
@@ -224,7 +224,7 @@ class ForeignKeySearchInput(forms.TextInput):
             'admin_media_prefix': admin_media_prefix,
             'model_name': self.rel.to._meta.module_name,
             'app_label': self.rel.to._meta.app_label,
-            'label': striptags(label),
+            'label': force_escape(striptags(label)),
             'name': name,
             'extra_params': extra_params,
         }
