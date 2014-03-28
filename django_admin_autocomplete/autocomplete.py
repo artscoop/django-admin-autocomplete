@@ -182,7 +182,7 @@ class ForeignKeySearchInput(forms.TextInput):
 
         return rendered + mark_safe(u'''
             <style type="text/css" media="screen">
-                #lookup_%(name)s {padding-right:20px; background: url(%(admin_media_prefix)simg/selector-search.gif) no-repeat right;}
+                #lookup_%(name)s {margin-right:20px; background: url(%(admin_media_prefix)simg/selector-search.gif) no-repeat right;}
                 #del_%(name)s {display: none;}
             </style>
 
