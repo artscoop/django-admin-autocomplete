@@ -187,7 +187,7 @@ class ForeignKeySearchInput(forms.TextInput):
             </style>
 
             <input type="text" id="lookup_%(name)s" value="%(label)s" />
-            <a href="#" id="del_%(name)s"> <img src="%(admin_media_prefix)simg/icon_deletelink.gif" /> </a>
+            <a href="#" id="del_%(name)s"><img src="%(admin_media_prefix)simg/icon_deletelink.gif" /></a>
             <script type="text/javascript">
                 if ($('#lookup_%(name)s').val()) {
                     $('#del_%(name)s').show()
