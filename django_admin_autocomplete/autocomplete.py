@@ -103,7 +103,7 @@ class AutocompleteFKMixin(object):
                 if hasattr(obj, 'ajax_str') and callable(obj.ajax_str):
                     return obj.ajax_str()
                 else:
-                    return unicode(object)
+                    return unicode(obj)
 
             data = ''.join([u'%s|%s\n' % (ajax_str(f), f.pk) for f in qs])
             return HttpResponse(data, mimetype='text/plain')
