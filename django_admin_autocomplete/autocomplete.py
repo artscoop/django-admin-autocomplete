@@ -216,6 +216,7 @@ class ForeignKeySearchInput(forms.TextInput):
                     $('#id_%(name)s').val('');
                     $('#del_%(name)s').hide();
                     $('#lookup_%(name)s').val('');
+                    return false;
                 });
         </script>
         ''') % {
