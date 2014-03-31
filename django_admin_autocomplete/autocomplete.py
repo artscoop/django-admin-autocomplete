@@ -1,5 +1,6 @@
 # coding: utf-8
 # for autocomplete
+import re
 import operator
 
 from django import forms
@@ -180,6 +181,9 @@ class ForeignKeySearchInput(forms.TextInput):
         except AttributeError:
             admin_media_prefix = settings.STATIC_URL + "admin/"
 
+        label = re.sub(r"(<span>.*<\/span>)", "", label)
+        label = force_escape(striptags(label))
+
         return rendered + mark_safe(u'''
             <style type="text/css" media="screen">
                 #lookup_%(name)s {margin-right:20px; background: url(%(admin_media_prefix)simg/selector-search.gif) no-repeat right;}
@@ -202,6 +206,7 @@ class ForeignKeySearchInput(forms.TextInput):
                         %(extra_params)s
                     },
                     'formatResult': function(data, text, total) {
+                        text = text.replace(/(<span>.*<\/span>)/ig,"");  // Trim span tag with inner content
                         text = text.replace(/(<([^>]+)>)/ig,""); // Trim tags
                         text = text.replace(/^\s\s*/, '').replace(/\s\s*$/, ''); // Trim spaces
                         return text;
@@ -224,7 +229,7 @@ class ForeignKeySearchInput(forms.TextInput):
             'admin_media_prefix': admin_media_prefix,
             'model_name': self.rel.to._meta.module_name,
             'app_label': self.rel.to._meta.app_label,
-            'label': force_escape(striptags(label)),
+            'label': label,
             'name': name,
             'extra_params': extra_params,
         }
