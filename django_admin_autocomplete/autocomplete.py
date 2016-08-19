@@ -1,5 +1,6 @@
 # coding: utf-8
 # for autocomplete
+import re
 import operator
 
 from django import forms
@@ -10,7 +11,7 @@ from django.conf.urls.defaults import patterns
 from django.db.models.query import QuerySet
 from django.http import HttpResponse, HttpResponseNotFound
 from django.conf import settings
-from django.template.defaultfilters import striptags
+from django.template.defaultfilters import striptags, force_escape
 
 
 # ModelAdmin Mixin to enable autocompletion
@@ -103,7 +104,7 @@ class AutocompleteFKMixin(object):
                 if hasattr(obj, 'ajax_str') and callable(obj.ajax_str):
                     return obj.ajax_str()
                 else:
-                    return unicode(object)
+                    return unicode(obj)
 
             data = ''.join([u'%s|%s\n' % (ajax_str(f), f.pk) for f in qs])
             return HttpResponse(data, mimetype='text/plain')
@@ -180,14 +181,17 @@ class ForeignKeySearchInput(forms.TextInput):
         except AttributeError:
             admin_media_prefix = settings.STATIC_URL + "admin/"
 
+        label = re.sub(r"(<span>.*<\/span>)", "", label)
+        label = force_escape(striptags(label))
+
         return rendered + mark_safe(u'''
             <style type="text/css" media="screen">
-                #lookup_%(name)s {padding-right:20px; background: url(%(admin_media_prefix)simg/selector-search.gif) no-repeat right;}
+                #lookup_%(name)s {margin-right:20px; background: url(%(admin_media_prefix)simg/selector-search.gif) no-repeat right;}
                 #del_%(name)s {display: none;}
             </style>
 
             <input type="text" id="lookup_%(name)s" value="%(label)s" />
-            <a href="#" id="del_%(name)s"> <img src="%(admin_media_prefix)simg/icon_deletelink.gif" /> </a>
+            <a href="#" id="del_%(name)s"><img src="%(admin_media_prefix)simg/icon_deletelink.gif" /></a>
             <script type="text/javascript">
                 if ($('#lookup_%(name)s').val()) {
                     $('#del_%(name)s').show()
@@ -202,6 +206,7 @@ class ForeignKeySearchInput(forms.TextInput):
                         %(extra_params)s
                     },
                     'formatResult': function(data, text, total) {
+                        text = text.replace(/(<span>.*<\/span>)/ig,"");  // Trim span tag with inner content
                         text = text.replace(/(<([^>]+)>)/ig,""); // Trim tags
                         text = text.replace(/^\s\s*/, '').replace(/\s\s*$/, ''); // Trim spaces
                         return text;
@@ -216,6 +221,7 @@ class ForeignKeySearchInput(forms.TextInput):
                     $('#id_%(name)s').val('');
                     $('#del_%(name)s').hide();
                     $('#lookup_%(name)s').val('');
+                    return false;
                 });
         </script>
         ''') % {
@@ -223,7 +229,7 @@ class ForeignKeySearchInput(forms.TextInput):
             'admin_media_prefix': admin_media_prefix,
             'model_name': self.rel.to._meta.module_name,
             'app_label': self.rel.to._meta.app_label,
-            'label': striptags(label),
+            'label': label,
             'name': name,
             'extra_params': extra_params,
         }
